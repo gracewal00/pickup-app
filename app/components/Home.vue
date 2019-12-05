@@ -1,7 +1,7 @@
 <template>
     <Page>
         <ActionBar>
-            <Label text="Home"></Label>
+            <Label text="Pick Up Events" color="#18261F" />
         </ActionBar>
 	<ScrollView>
 		<StackLayout class="events">
