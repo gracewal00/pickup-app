@@ -3,79 +3,18 @@
         <ActionBar>
             <Label text="Home"></Label>
         </ActionBar>
-
 	<ScrollView>
 		<StackLayout class="events">
-			<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-	<label>Test</label>
-			<label>Test2</label>
-			<label>Test3</label>
-
+			<StackLayout backgroundColor="#ffffff" class="test">
+				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
+				<Label text="Hello world"/>
+			</StackLayout>
+			<AbsoluteLayout backgroundColor="#ffffff">
+				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
+			</AbsoluteLayout>
+			<AbsoluteLayout backgroundColor="#ffffff">
+				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
+			</AbsoluteLayout>
 		</StackLayout>
 	</ScrollView>
     </Page>
@@ -83,11 +22,6 @@
 
 <script>
     export default {
-        computed: {
-            message() {
-                return "Hello World";
-            }
-        }
     };
 </script>
 
@@ -99,15 +33,19 @@
         @include colorize($color: accent);
     }
 
-    .info {
-        font-size: 20;
-        horizontal-align: center;
-        vertical-align: center;
-	background-color: #ffa500;
-    }
+AbsoluteLayout {
+	margin: 10px 10px 0px 10px;
+	border-style: solid;
+	border-width: 5px;
+}
 
-	.einfo {
-		font-size: 20;
+.test {
+	margin: 10px 10px 0px 10px;
+	border-style: solid;
+	border-width: 5px;
+}
+
+	.events {
 	}
 
 	ActionBar {

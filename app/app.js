@@ -11,5 +11,7 @@ new Vue({
 
     components: {
         Home
+
     }
 }).$start();
+
