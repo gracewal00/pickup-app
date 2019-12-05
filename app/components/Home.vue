@@ -4,14 +4,80 @@
             <Label text="Home"></Label>
         </ActionBar>
 
-        <GridLayout>
-            <Label class="info">
-                <FormattedString>
-                    <Span class="fas" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                </FormattedString>
-            </Label>
-        </GridLayout>
+	<ScrollView>
+		<StackLayout class="events">
+			<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+	<label>Test</label>
+			<label>Test2</label>
+			<label>Test3</label>
+
+		</StackLayout>
+	</ScrollView>
     </Page>
 </template>
 
@@ -26,7 +92,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import '~@nativescript/theme/scss/variables/blue';
+    @import '~@nativescript/theme/scss/variables/purple';
 
     // Custom styles
     .fas {
@@ -37,5 +103,14 @@
         font-size: 20;
         horizontal-align: center;
         vertical-align: center;
+	background-color: #ffa500;
     }
+
+	.einfo {
+		font-size: 20;
+	}
+
+	ActionBar {
+		background-color: #ffa500;
+	}
 </style>
