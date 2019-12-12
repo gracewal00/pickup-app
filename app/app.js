@@ -1,17 +1,13 @@
 import Vue from "nativescript-vue";
 
-import Home from "./components/Home";
+import routes from "./routes";
+
+import BackendService from "./services/backend-service";
+
+const backendService = new BackendService();
+Vue.prototype.$backendService = backendService;
 
 new Vue({
-
-    template: `
-        <Frame>
-            <Home />
-        </Frame>`,
-
-    components: {
-        Home
-
-    }
+    render: h => h("frame", [h(backendService.working() ? routes.home : routes.error)])
 }).$start();
 
