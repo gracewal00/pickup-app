@@ -9,7 +9,7 @@
 				<Label text="Volleyball" height="100" width="100" />
 			</StackLayout>
 			<AbsoluteLayout backgroundColor="#ffffff">
-				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
+				<Label :text=display() left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
 			</AbsoluteLayout>
 			<AbsoluteLayout backgroundColor="#ffffff">
 				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
@@ -21,6 +21,11 @@
 
 <script>
     export default {
+        methods: {
+            display() {
+                return this.$backendService.working();
+            }
+        }
     };
 </script>
 

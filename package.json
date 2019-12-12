@@ -14,10 +14,8 @@
   "dependencies": {
     "@nativescript/theme": "~2.2.0",
     "kinvey-nativescript-sdk": "^4.2.5-next.1",
-    "nativescript-plugin-firebase": "^8.2.0",
     "nativescript-vue": "~2.4.0",
-    "tns-core-modules": "~6.2.0",
-    "typescript": "^3.7.3"
+    "tns-core-modules": "~6.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.1.0",
