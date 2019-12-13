@@ -10,7 +10,7 @@ Kinvey.init({
 export default class BackendService {
 
     working() {
-        return Kinvey.DataStore.collection('Inventory').find();
+        return Kinvey.DataStore.collection('Inventory').find("_id");
         //return !!Kinvey.Inventory.all();
     }
 }
