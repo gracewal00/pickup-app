@@ -21,9 +21,12 @@
 
 <script>
     export default {
+		data: {
+			events: ''
+		},
         methods: {
-            display() {
-                return this.$backendService.working();
+            getEvents() {
+                this.events = this.$backendService.getEvents();
             }
         }
     };

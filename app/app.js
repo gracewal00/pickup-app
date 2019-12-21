@@ -8,6 +8,6 @@ const backendService = new BackendService();
 Vue.prototype.$backendService = backendService;
 
 new Vue({
-    render: h => h("frame", [h(backendService.working() ? routes.home : routes.error)])
+    render: h => h("frame", [h(backendService.getEvents() ? routes.home : routes.error)])
 }).$start();
 
