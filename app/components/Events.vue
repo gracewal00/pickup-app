@@ -10,7 +10,7 @@
                 <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
             </StackLayout>
             <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
-            <StackLayout class="hbox text" orientation="horizontal">
+            <StackLayout class="text hbox " orientation="horizontal">
                 <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
                 <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
             </StackLayout>
@@ -21,6 +21,7 @@
 <script>
    import * as http from "http";
    import moment from "moment";
+
    export default {
        data() {
            return {
@@ -29,19 +30,17 @@
        }, 
        mounted() {
            this.getEvents();
-           console.log( "Mounted: getEvents processed" );
        },
        methods: {
            getEvents() {
                http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
                    this.events = result;
-                   console.log( "Results received" );
                    } ), error => {
                        console.log( "Could not get events" );
                }
            },
            moment: function( time ) {
-               return moment(time).format( 'h:mm a' );
+               return moment( time ).format( 'h:mm a' );
            }
        }
    };
