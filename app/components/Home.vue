@@ -4,32 +4,57 @@
             <Label text="Pick Up Events" color="#18261F" />
         </ActionBar>
 	<ScrollView>
-		<StackLayout class="events">
-			<StackLayout backgroundColor="#ffffff" class="test">
-				<Label text="Volleyball" height="100" width="100" />
+		<StackLayout >
+			<StackLayout class="eventItem" backgroundColor="#ffffff" v-for="e in events" >
+				<Label class="title" :text="e.title" width="100%"/>
+				<Label class="title" :text="e.description" width="100%"/>
+				<Label class="title" :text="e.people" width="100%"/>
+				<Label class="title" :text="e.location" width="100%"/>
+				<Label class="title" :text="e.start_time" width="100%"/>
+				<Label class="title" :text="e.end_time" width="100%"/>
+				<Label class="title" :text="e.date" width="100%"/>
+				<Label class="title" width="100%">Category: {{ e.category }}</Label>
 			</StackLayout>
-			<AbsoluteLayout backgroundColor="#ffffff">
-				<Label text="Hello World" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
-			</AbsoluteLayout>
-			<AbsoluteLayout backgroundColor="#ffffff">
-				<Label text="10,10" left="10" top="10" width="100" height="100" backgroundColor="#43b883"/>
-			</AbsoluteLayout>
 		</StackLayout>
 	</ScrollView>
     </Page>
 </template>
 
 <script>
-    export default {
-		data: {
-			events: ''
-		},
-        methods: {
-            getEvents() {
-                this.events = this.$backendService.getEvents();
-            }
-        }
-    };
+   import * as http from "http";
+   export default {
+       data() {
+           return {
+               events: []
+           };
+       }, 
+       mounted() {
+           this.getEvents();
+           console.log( "Mounted: getEvents processed" );
+       },
+       methods: {
+           getEvents() {
+               http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
+                   this.events = result;
+                   console.log( "Results received" );
+                   debugger;
+                   } ), error => {
+                       console.log( "Could not get events" );
+               }
+           }
+       }
+   };
+   // export default {
+   // 	data: {
+   // 		events: ''
+   // 	},
+   //     methods: {
+   //         getEvents() {
+   //             return "Hello";
+   //             //this.events = this.$backendService.getEvents();
+   //         }
+   //     }
+   // };
 </script>
 
 <style scoped lang="scss">
@@ -40,22 +65,17 @@
         @include colorize($color: accent);
     }
 
-AbsoluteLayout {
-	margin: 10px 10px 0px 10px;
-	border-style: solid;
-	border-width: 5px;
-}
+    .title {
+        font-size: 20;
+    }
 
-.test {
-	margin: 10px 10px 0px 10px;
-	border-style: solid;
-	border-width: 5px;
-}
+    .eventItem {
+        margin: 10px;
+        border-style: solid;
+        border-width: 5px;
+    }
 
-.events {
-}
-
-ActionBar {
-	background-color: #ffa500;
-}
+    ActionBar {
+        background-color: #ffa500;
+    }
 </style>

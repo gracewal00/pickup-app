@@ -1,3 +1,4 @@
+import * as http from 'http';
 export default class BackendService {
 
     getEvents() {
