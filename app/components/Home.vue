@@ -1,7 +1,7 @@
 <template>
     <Page>
         <ActionBar>
-            <Label text="Pick Up Events" color="#18261F" />
+            <Label text="Pick Up Events" color="#ffffff" />
         </ActionBar>
         <ScrollView>
             <Events />
@@ -25,6 +25,11 @@
     }
 
     ActionBar {
-        background-color: #ffa500;
+        background-color: #525252;
+        height: 11%;
+                label {
+                    font-size: 25em;
+                }
     }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <StackLayout>
+    <StackLayout class="eventContainer" >
         <StackLayout class="eventItem" v-for="e in events" >
             <Label class="category" :text="e.category" width="100%"/>
             <Label class="title" :text="e.title" width="100%"/>
@@ -48,10 +48,19 @@
 
 <style scoped lang="scss">
 
+    .eventContainer {
+        background-color: #79c6c6;
+    }
+
     .eventItem {
-        margin: 0em;
+        margin-top: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
         border-style: solid;
         border-width: 2px;
+        border-color: #606060;
+        border-radius: 20px;
+        background-color: #ffffff;
     }
 
     .title {
