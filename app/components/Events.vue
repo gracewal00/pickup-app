@@ -16,6 +16,7 @@
                     <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
                 </StackLayout>
             </StackLayout>
+            <Label height="20px" />
         </StackLayout>
     </ScrollView>
 </template>
