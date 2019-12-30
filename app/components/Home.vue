@@ -3,33 +3,34 @@
         <ActionBar>
             <Label text="Pick Up Events" color="#ffffff" />
         </ActionBar>
-        <ScrollView>
-            <Events />
-        </ScrollView>
-    </Page>
+        <GridLayout rows="*" ref="rootLayout">
+            <Events row="0" />
+            <addButton row="0" />
+        </GridLayout>
+</Page>
 </template>
 
 <script>
-    import Events from "./Events"
-    export default {
-        components: { Events }
-    }
+import Events from "./Events"
+import addButton from "./addButton"
+export default {
+components: { Events, addButton }
+}
 </script>
 
 <style scoped lang="scss">
-    @import '~@nativescript/theme/scss/variables/purple';
+@import '~@nativescript/theme/scss/variables/purple';
 
-    // Custom styles
-    .fas {
-        @include colorize($color: accent);
-    }
+// Custom styles
+.fas {
+@include colorize($color: accent);
+}
 
-    ActionBar {
-        background-color: #525252;
-        height: 11%;
-                label {
-                    font-size: 25em;
-                }
-    }
-
+ActionBar {
+background-color: #525252;
+height: 11%;
+        label {
+            font-size: 25em;
+        }
+}
 </style>

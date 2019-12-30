@@ -1,21 +1,23 @@
 <template>
-    <StackLayout class="eventContainer" >
-        <StackLayout class="eventItem" v-for="e in events" >
-            <Label class="category" :text="e.category" width="100%"/>
-            <Label class="title" :text="e.title" width="100%"/>
-            <Label class="text description" :text="e.description" width="100%"/>
-            <Label class="spacer" />
-            <StackLayout  class="hbox" orientation="horizontal" >
-                <Label class="date textLeft" width="45%">D: {{ e.date }}</Label>
-                <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
-            </StackLayout>
-            <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
-            <StackLayout class="text hbox " orientation="horizontal">
-                <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
-                <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
+    <ScrollView>
+        <StackLayout class="eventContainer" >
+            <StackLayout class="eventItem" v-for="e in events" >
+                <Label class="category" :text="e.category" width="100%"/>
+                <Label class="title" :text="e.title" width="100%"/>
+                <Label class="text description" :text="e.description" width="100%"/>
+                <Label class="spacer" />
+                <StackLayout  class="hbox" orientation="horizontal" >
+                    <Label class="date textLeft" width="45%">D: {{ e.date }}</Label>
+                    <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
+                </StackLayout>
+                <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
+                <StackLayout class="text hbox " orientation="horizontal">
+                    <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
+                    <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </template>
 
 <script>
