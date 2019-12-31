@@ -1,21 +1,24 @@
 <template>
-    <StackLayout>
-        <StackLayout class="eventItem" v-for="e in events" >
-            <Label class="category" :text="e.category" width="100%"/>
-            <Label class="title" :text="e.title" width="100%"/>
-            <Label class="text description" :text="e.description" width="100%"/>
-            <Label class="spacer" />
-            <StackLayout  class="hbox" orientation="horizontal" >
-                <Label class="date textLeft" width="45%">D: {{ e.date }}</Label>
-                <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
-            </StackLayout>
-            <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
-            <StackLayout class="text hbox " orientation="horizontal">
-                <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
-                <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
+    <ScrollView>
+        <StackLayout class="eventContainer" >
+            <StackLayout class="eventItem" @tap="onEventTap( e )" v-for="e in events" >
+                <Label height="20px" />
+                <Label class="category" :text="e.category" width="100%"/>
+                <Label class="title" :text="e.title" width="100%"/>
+                <Label class="text description" :text="e.description" width="100%"/>
+                <Label class="spacer" />
+                <StackLayout  class="hbox" orientation="horizontal" >
+                    <Label class="date textLeft" width="45%">D: {{ e.date }}</Label>
+                    <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
+                </StackLayout>
+                <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
+                <StackLayout class="text hbox " orientation="horizontal">
+                    <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
+                    <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </template>
 
 <script>
@@ -35,9 +38,13 @@
            getEvents() {
                http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
                    this.events = result;
+                   console.log( "Data pulled" );
                    } ), error => {
                        console.log( "Could not get events" );
                }
+           },
+           onEventTap( e ) {
+               console.log( "Event item: " + e.title+ " tapped" )
            },
            moment: function( time ) {
                return moment( time ).format( 'h:mm a' );
@@ -48,14 +55,23 @@
 
 <style scoped lang="scss">
 
+    .eventContainer {
+        background-color: #ff7b00;
+    }
+
     .eventItem {
-        margin: 0em;
+        margin-bottom: 50px;
+        margin-right: 55px;
+        margin-left: 55px;
         border-style: solid;
-        border-width: 2px;
+        border-radius: 50px;
+        background-color: #ffffff;
+        android-elevation: 5;
+        padding: 10;
     }
 
     .title {
-        font-size: 20em;
+        font-size: 22em;
         text-align: center;
         font-weight: bold;
     }
@@ -64,8 +80,7 @@
         font-size: 13em;
         color: #7e7070;
         text-align: right;
-        margin-right: 15em;
-        margin-top: 0em;
+        margin-right: 30em;
     }
 
     .text {
@@ -92,11 +107,6 @@
     .hbox {
         margin-left: 15px;
         margin-right: 15px;
-    }
-
-    .border {
-        border-style: solid;
-        border-width: 1px;
     }
 
 </style>
