@@ -1,7 +1,7 @@
 <template>
     <Page>
-        <ActionBar>
-            <Label text="Pick Up Events" color="#ffffff" />
+        <ActionBar flat="true" width="100%">
+            <Label text="Pick Up Events" color="#ffffff" horizontalAlignment="left" />
         </ActionBar>
         <GridLayout rows="*" ref="rootLayout">
             <Events row="0" />
@@ -14,7 +14,7 @@
 import Events from "./Events"
 import addButton from "./addButton"
 export default {
-components: { Events, addButton }
+    components: { Events, addButton }
 }
 </script>
 
@@ -27,10 +27,10 @@ components: { Events, addButton }
 }
 
 ActionBar {
-background-color: #525252;
-height: 11%;
-        label {
-            font-size: 25em;
-        }
+    background-color: #ff7b00;
+    height: 11%;
+            label {
+                font-size: 25em;
+            }
 }
 </style>

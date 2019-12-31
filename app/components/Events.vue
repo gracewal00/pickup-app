@@ -1,7 +1,8 @@
 <template>
     <ScrollView>
         <StackLayout class="eventContainer" >
-            <StackLayout class="eventItem" v-for="e in events" >
+            <StackLayout class="eventItem" @tap="onEventTap( e )" v-for="e in events" >
+                <Label height="20px" />
                 <Label class="category" :text="e.category" width="100%"/>
                 <Label class="title" :text="e.title" width="100%"/>
                 <Label class="text description" :text="e.description" width="100%"/>
@@ -16,7 +17,6 @@
                     <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
                 </StackLayout>
             </StackLayout>
-            <Label height="20px" />
         </StackLayout>
     </ScrollView>
 </template>
@@ -38,9 +38,13 @@
            getEvents() {
                http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
                    this.events = result;
+                   console.log( "Data pulled" );
                    } ), error => {
                        console.log( "Could not get events" );
                }
+           },
+           onEventTap( e ) {
+               console.log( "Event item: " + e.title+ " tapped" )
            },
            moment: function( time ) {
                return moment( time ).format( 'h:mm a' );
@@ -52,22 +56,22 @@
 <style scoped lang="scss">
 
     .eventContainer {
-        background-color: #79c6c6;
+        background-color: #ff7b00;
     }
 
     .eventItem {
-        margin-top: 20px;
-        margin-right: 10px;
-        margin-left: 10px;
+        margin-bottom: 50px;
+        margin-right: 55px;
+        margin-left: 55px;
         border-style: solid;
-        border-width: 2px;
-        border-color: #606060;
-        border-radius: 20px;
+        border-radius: 50px;
         background-color: #ffffff;
+        android-elevation: 5;
+        padding: 10;
     }
 
     .title {
-        font-size: 20em;
+        font-size: 22em;
         text-align: center;
         font-weight: bold;
     }
@@ -76,8 +80,7 @@
         font-size: 13em;
         color: #7e7070;
         text-align: right;
-        margin-right: 15em;
-        margin-top: 0em;
+        margin-right: 30em;
     }
 
     .text {
@@ -104,11 +107,6 @@
     .hbox {
         margin-left: 15px;
         margin-right: 15px;
-    }
-
-    .border {
-        border-style: solid;
-        border-width: 1px;
     }
 
 </style>
