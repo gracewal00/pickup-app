@@ -14,7 +14,7 @@
 import Events from "./Events"
 import addButton from "./addButton"
 export default {
-    components: { Events, addButton }
+components: { Events, addButton }
 }
 </script>
 
