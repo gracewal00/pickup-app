@@ -8,13 +8,12 @@
                 <Label class="text description" :text="e.description" width="100%"/>
                 <Label class="spacer" />
                 <StackLayout  class="hbox" orientation="horizontal" >
-                    <Label class="date textLeft" width="45%">D: {{ e.date }}</Label>
-                    <Label class="location textRight" width="55%">L: {{ e.location}}</Label>
+                    <Label class="date textLeft" width="45%">{{ checkNull( formatDate( e.date ), "Date" ) }}</Label>
+                    <Label class="location textRight" width="55%">{{ checkNull( e.location, "Location" ) }}</Label>
                 </StackLayout>
-                <Label class="text time" width="100%">Start: {{ moment( e.start_time ) }}</Label>
                 <StackLayout class="text hbox " orientation="horizontal">
-                    <Label class="time textLeft" width="45%">End: {{ moment( e.end_time ) }}</Label>
-                    <Label class="people textRight" width="55%">P: {{ e.people }}</Label>
+                    <Label class="time textLeft" width="65%">{{ checkNull( formatTime( e.start_time ), "Start Time" ) }} -> {{ checkNull( formatTime( e.end_time ), "End Time" ) }}</Label>
+                    <Label class="people textRight" width="35%">P: {{ e.people }}</Label>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
@@ -22,35 +21,45 @@
 </template>
 
 <script>
-   import * as http from "http";
-   import moment from "moment";
+    import * as http from "http";
+    import moment from "moment";
 
-   export default {
-       data() {
-           return {
-               events: []
-           };
-       }, 
-       mounted() {
-           this.getEvents();
-       },
-       methods: {
-           getEvents() {
-               http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
-                   this.events = result;
-                   console.log( "Data pulled" );
-                   } ), error => {
-                       console.log( "Could not get events" );
-               }
-           },
-           onEventTap( e ) {
-               console.log( "Event item: " + e.title+ " tapped" )
-           },
-           moment: function( time ) {
-               return moment( time ).format( 'h:mm a' );
-           }
-       }
-   };
+        export default {
+        data() {
+            return {
+                events: []
+            };
+        }, 
+        mounted() {
+            this.getEvents();
+        },
+        methods: {
+            getEvents() {
+                http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
+                    this.events = result;
+                    console.log( "Data pulled" );
+                } ), error => {
+                    console.log( "Could not get events" );
+                }
+            },
+            onEventTap( e ) {
+                console.log( "Event item: " + e.title+ " tapped" )
+            },
+            checkNull ( item, name ) {
+                return ( item != null ? item : ( "No " + name ) );
+            },
+            formatTime: function( time ) {
+                if ( time ) {
+                    return moment( time ).format( 'h:mm a' );
+                }
+            },
+            formatDate: function( date ) {
+                if ( date ) {
+                    return moment( date ).format( 'MM/DD/YYYY' );
+                } 
+            }
+        }
+    };
 </script>
 
 <style scoped lang="scss">
