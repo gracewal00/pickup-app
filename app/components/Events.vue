@@ -3,19 +3,18 @@
             <RadListView class="eventContainer"
             for="e in events"
             pullToRefresh="true"
-            @tap="onEventTap( e )" 
             @pullToRefreshInitiated="onPullToRefresh" >
                 <v-template>
-                    <StackLayout class="eventItem">
+                    <StackLayout class="eventItem" @tap="onEventTap( e )">
                         <Label class="category" :text="checkNull( e.category, 'No Category' )" width="100%"/>
-                        <Label class="title" :text="checkNull( e.title, 'No Title Given' )" width="100%"/>
+                        <Label class="title" :text="checkNull( e.title, '{Null Title}' )" width="100%"/>
                         <Label class="text description" :text="checkNull( e.description, 'No Description' )" width="100%"/>
-                        <StackLayout class="text" orientation="horizontal" width="100%" >
+                        <StackLayout class="text" orientation="horizontal" width="100%" padding="0" >
                             <Label width="50%" textAlignment="left" >{{ checkNull( formatDate( e.date ), "Date not given" ) }}</Label>
                             <Label width="50%" textAlignment="right" >{{ checkNull( e.location, "Location not given" ) }}</Label>
                         </StackLayout>
-                        <StackLayout class="text" orientation="horizontal" width="100%">
-                            <StackLayout v-if="e.start_time || e.end_time" width="50%" orientation="horizontal" textAlignment="left" >
+                        <StackLayout class="text" orientation="horizontal" width="100%" padding="0">
+                            <StackLayout v-if="e.start_time || e.end_time" width="50%" orientation="horizontal" textAlignment="left" padding="0" >
                                     <Label >{{ checkNull( formatTime( e.start_time ), "..." ) }}</Label>
                                     <Label text=" -> "/>
                                     <Label >{{ checkNull( formatTime( e.end_time ), "..." ) }}</Label>
@@ -36,7 +35,8 @@
         export default {
         data() {
             return {
-                events: []
+                events: [],
+                console: "Hello World"
             };
         }, 
         mounted() {
@@ -47,6 +47,9 @@
                 http.getJSON( "https://pickup-app-backend.herokuapp.com/api/events" ).then( result => {
                     this.events = result;
                     console.log( "Data pulled" );
+                    //console.log( "Sorting Data" );
+                    //this.events.sort( sortData ); // sort data
+                    //console.log( "Data Sorted" );
                 } ), error => {
                     console.log( "Could not get events" );
                 }
@@ -56,14 +59,14 @@
                 // Following method prevents race conditions in ios where ui isn't updated yet
                 this.$nextTick( () => {
                     this.getEvents();
-                    object.notifyPullToRefreshFinished();
+                    object.notifyPullToRefreshFinished(); // Clears reloading icon
                 });
             },
-            onEventTap( e ) {
-                console.log( "Event item: " + e.title+ " tapped" )
+            onEventTap ( e ) {
+                console.log( "Event item: " + e.title + " tapped." );
             },
             checkNull ( item, description) {
-                return ( item != null ? item : description );
+                return ( item ? item : description );
             },
             formatTime: function( time ) {
                 if ( time ) {
@@ -99,6 +102,9 @@
         background-color: #ffffff;
         android-elevation: 5;
         padding: 10;
+                 * {
+                     border-width: 0px;
+                 }
     }
 
     .title {
