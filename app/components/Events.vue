@@ -1,22 +1,31 @@
 <template>
     <ScrollView>
-        <StackLayout class="eventContainer" >
-            <StackLayout class="eventItem" @tap="onEventTap( e )" v-for="e in events" >
-                <Label height="20px" />
-                <Label class="category" :text="e.category" width="100%"/>
-                <Label class="title" :text="e.title" width="100%"/>
-                <Label class="text description" :text="e.description" width="100%"/>
-                <Label class="spacer" />
-                <StackLayout  class="hbox" orientation="horizontal" >
-                    <Label class="date textLeft" width="45%">{{ checkNull( formatDate( e.date ), "Date" ) }}</Label>
-                    <Label class="location textRight" width="55%">{{ checkNull( e.location, "Location" ) }}</Label>
-                </StackLayout>
-                <StackLayout class="text hbox " orientation="horizontal">
-                    <Label class="time textLeft" width="65%">{{ checkNull( formatTime( e.start_time ), "Start Time" ) }} -> {{ checkNull( formatTime( e.end_time ), "End Time" ) }}</Label>
-                    <Label class="people textRight" width="35%">{{ numPeople( e.people ) }} people going</Label>
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
+            <RadListView class="eventContainer"
+            for="e in events"
+            pullToRefresh="true"
+            @tap="onEventTap( e )" 
+            @pullToRefreshInitiated="onPullToRefresh" >
+                <v-template>
+                    <StackLayout class="eventItem">
+                        <Label class="category" :text="checkNull( e.category, 'No Category' )" width="100%"/>
+                        <Label class="title" :text="checkNull( e.title, 'No Title Given' )" width="100%"/>
+                        <Label class="text description" :text="checkNull( e.description, 'No Description' )" width="100%"/>
+                        <StackLayout class="text" orientation="horizontal" width="100%" >
+                            <Label width="50%" textAlignment="left" >{{ checkNull( formatDate( e.date ), "Date not given" ) }}</Label>
+                            <Label width="50%" textAlignment="right" >{{ checkNull( e.location, "Location not given" ) }}</Label>
+                        </StackLayout>
+                        <StackLayout class="text" orientation="horizontal" width="100%">
+                            <StackLayout v-if="e.start_time || e.end_time" width="50%" orientation="horizontal" textAlignment="left" >
+                                    <Label >{{ checkNull( formatTime( e.start_time ), "..." ) }}</Label>
+                                    <Label text=" -> "/>
+                                    <Label >{{ checkNull( formatTime( e.end_time ), "..." ) }}</Label>
+                            </StackLayout>
+                                <Label v-else width="50%" textAlignment="left" text="No times given" />
+                                <Label width="50%" textAlignment="right" >{{ numPeople( e.people ) }} people going</Label>
+                        </StackLayout>
+                    </StackLayout>
+                </v-template>
+            </RadListView>
     </ScrollView>
 </template>
 
@@ -42,11 +51,19 @@
                     console.log( "Could not get events" );
                 }
             },
+            onPullToRefresh( { object } ) {
+                console.log( "Pulling..." );
+                // Following method prevents race conditions in ios where ui isn't updated yet
+                this.$nextTick( () => {
+                    this.getEvents();
+                    object.notifyPullToRefreshFinished();
+                });
+            },
             onEventTap( e ) {
                 console.log( "Event item: " + e.title+ " tapped" )
             },
-            checkNull ( item, name ) {
-                return ( item != null ? item : ( "No " + name ) );
+            checkNull ( item, description) {
+                return ( item != null ? item : description );
             },
             formatTime: function( time ) {
                 if ( time ) {
@@ -94,13 +111,12 @@
         font-size: 13em;
         color: #7e7070;
         text-align: right;
-        margin-right: 30em;
+        margin-bottom: -40px;
+        margin-right: 40px;
     }
 
     .text {
         font-size: 15em;
-        margin-left: 28em;
-        margin-right: 15em;
     }
 
     .description {
@@ -108,19 +124,9 @@
         text-align: center;
     }
 
-    .textLeft {
-        text-align: left;
-        font-size: 15em;
-    }
-
-    .textRight {
-        text-align: right;
-        font-size: 15em;
-    }
-
-    .hbox {
-        margin-left: 15px;
-        margin-right: 15px;
+    .border {
+        border-style: solid;
+        border-width: 1px;
     }
 
 </style>
