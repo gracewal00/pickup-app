@@ -1,11 +1,11 @@
 import Vue from "nativescript-vue";
 //import BackendService from "./services/backend-service";
 import Home from "./components/Home"
+import RadListView from "nativescript-ui-listview/vue";
 
 //const backendService = new BackendService();
 //Vue.prototype.$backendService = backendService;
-
-
+Vue.use( RadListView );
 
 new Vue({
     template: `

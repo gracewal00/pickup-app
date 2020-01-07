@@ -1,5 +1,6 @@
 <template>
     <ScrollView>
+        <RadListView/>
         <StackLayout class="eventContainer" >
             <StackLayout class="eventItem" @tap="onEventTap( e )" v-for="e in events" >
                 <Label height="20px" />
@@ -13,7 +14,7 @@
                 </StackLayout>
                 <StackLayout class="text hbox " orientation="horizontal">
                     <Label class="time textLeft" width="65%">{{ checkNull( formatTime( e.start_time ), "Start Time" ) }} -> {{ checkNull( formatTime( e.end_time ), "End Time" ) }}</Label>
-                    <Label class="people textRight" width="35%">{{ numPeople( e.people ) }} people going</Label>
+                    <Label class="people textRight" width="35%">P: {{ e.people }}</Label>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
@@ -57,11 +58,6 @@
                 if ( date ) {
                     return moment( date ).format( 'MM/DD/YYYY' );
                 } 
-            },
-            numPeople ( people ) {
-                if ( people != null ) {
-                    return people.split( ',' ).length;
-                } else { return 0; }
             }
         }
     };
